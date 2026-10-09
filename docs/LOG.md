@@ -56,3 +56,17 @@
   - Steven to decide: reword the question to two-sided ("did it change, and when; does the 2025 decoupling show at 2Y") and pre-register H1, H2, H3.
   - BOJ 17:00 USD/JPY series code and start date in BOJ Time-Series Data Search not checked.
   - Five papers to read in full before the step 4 protocol (list in 002_deep_review.md section 7).
+
+## 2026-10-09 — Task 003: Targets, repo rules, protocol draft
+
+- What changed: recorded Steven's targets (Target 0 forecast and study the yen; Target 1 reworded descriptive question; key use 0-2 year insight). Updated the CLAUDE.md goal and rules, README, DECISIONS. Replaced the PROTOCOL.md placeholder with a Target 1 draft (DRAFT v1, not frozen). No code, no data, no estimation.
+- Files touched: docs/briefs/003_targets_and_protocol_draft.md (new), CLAUDE.md, README.md, docs/DECISIONS.md, docs/PROTOCOL.md, docs/LOG.md.
+- Results: no numbers. The protocol fixes specs S1-S3 and S2m; the decoupling measures M1 (beta), M2 (explained share), M3 (unexplained drift); hypotheses H1-H4 with predictions; Step 0 replication of the IMF mid-2025 10Y decoupling; a robustness list; a pre-freeze checklist.
+- Deviations from brief:
+  - Third task in this session; breaks the one-task-per-session rule. Steven said to continue in this session.
+  - Added H4 (stable betas, decoupling in the unexplained part) and a monthly horizon check (S2m), beyond the three hypotheses in the deep review.
+  - Work order changed: the plan put the rolling chart (old step 3) before pre-registration (old step 4). The protocol now puts freeze first, then data ingest, then rolling betas, because a rolling beta is already an estimate.
+- Open issues:
+  - Steven to sign off on and freeze PROTOCOL.md after the pre-freeze checklist (section 11).
+  - Target 0 protocol not written. Steven to decide when it starts.
+  - The Notion page still shows the old research question marked "待定". Update only on Steven's instruction.

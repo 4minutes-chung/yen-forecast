@@ -42,3 +42,17 @@
   - Unverified leads: Lee (SSRN), JP Morgan 2024 note, Minenna (Central Banking), FMIR 2025, Nishigaki (2025).
   - BIS WP 626 country list (BOJ included or not) not confirmed. Kano and Wada data and sample not read.
   - Research question still not recorded in the repo (CLAUDE.md goal is still forecasting). Step 3 brief.
+
+## 2026-10-09 — Task 002 addendum: deep review and Notion update
+
+- What changed: deep review of the task 002 findings, at Steven's request. Updated the existing Notion project page with the findings and the review; Steven gave a direct instruction to edit it.
+- Files touched: docs/lit/002_deep_review.md (new), docs/LOG.md. Outside the repo: Notion page "日圓研究計劃" (status callout, research-question note, step 2 status, new sections "第 2 步結果" and "深度檢討", two open issues).
+- Results:
+  - Three competing hypotheses for the beta of ΔUSD/JPY on ΔJP 2Y: H1 rises after YCC dismantling (original plan); H2 falls after exit (lower-bound amplification, Ferrari et al.); H3 the 2Y link holds while the 10Y link decouples after 2025 (inference from IMF CR 26/75 and Masujima & Sato).
+  - Design fixes found: BOJ publishes USD/JPY at 17:00 JST (interbank mid rate), released on the web since 4 Jan 2007, verified on boj.or.jp. Separate JP and US legs; report JGB 2Y volatility with each beta; robustness without intervention days and early August 2024.
+  - Masujima & Sato regressions are in daily changes (checked in the PDF).
+- Deviations from brief: none beyond those listed for task 002. No new downloads; one more WebFetch of boj.or.jp HTML.
+- Open issues:
+  - Steven to decide: reword the question to two-sided ("did it change, and when; does the 2025 decoupling show at 2Y") and pre-register H1, H2, H3.
+  - BOJ 17:00 USD/JPY series code and start date in BOJ Time-Series Data Search not checked.
+  - Five papers to read in full before the step 4 protocol (list in 002_deep_review.md section 7).

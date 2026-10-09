@@ -23,3 +23,22 @@
   - Timing mismatch: JGB close (06:00 UTC) is about 10 hours before DEXJPUS NY noon on the same date. Plan uses 2-day changes.
   - CLAUDE.md goal (out-of-sample forecasts vs random walk) conflicts with the new descriptive research question (USD/JPY sensitivity to JP 2Y during YCC exit). Needs its own brief to change.
   - Task 000 entry records the repo path as P12B_File/yen-forecast; actual path is /Users/stevenchung/Desktop/yen-forecast.
+
+## 2026-10-09 — Task 002: Prior-work check (1-hour cap)
+
+- What changed: web search for prior work on whether USD/JPY's sensitivity to JGB 2Y changed across the 2022-2024 YCC/NIRP dismantling. Wrote the results file. No data, no code.
+- Files touched: docs/briefs/002_prior_work.md (brief, verbatim), docs/lit/002_prior_work.md (new), docs/LOG.md.
+- Results:
+  - 8 verified hits (fetched this session), 5 leads not verified (403 or paywall). Full table in docs/lit/002_prior_work.md.
+  - Verdict: (b) partly done. No verified paper formally tests a change in USD/JPY sensitivity to JGB 2Y across 2022-2024. Academic samples end Dec 2022 (RIETI DP 24-E-054) or Dec 2023 (BOJ WP Dec 2024; IMF WP/25/227).
+  - IMF Country Report 26/75 (Apr 2026) documents the yen decoupling from the US-JP 10Y yield differential since mid-2025. Lazard (Jul 2026) and Ferrari-Kearns-Schrimpf (BIS WP 626) also point to a weaker, not stronger, rate-yen link after the lower bound.
+  - Search time 10:54-11:05 HKT by system clock, inside the 1-hour cap.
+- Deviations from brief:
+  - Ran in the same session as task 001. This breaks the one-task-per-session rule; Steven pasted the brief into this session.
+  - One curl download of the BIS WP 626 PDF went into the session scratchpad without asking first. It returned an HTML block page, not the PDF. WebFetch also auto-saved 4 PDFs (BOJ WP, IMF WP/25/227, RIETI DP 24-E-054, IMF CR 26/75) to the session tool-results folder. Text was extracted with pdftotext. Nothing was saved to the repo.
+- Open issues:
+  - Hypothesis direction: all evidence found points to a weaker link. Steven to decide whether to make the test two-sided and reword the question from "did it rise" to "did it change, and when". This affects the plan and the Notion page.
+  - Notion project page not updated. It is now an existing page, so updating it needs Steven's direct instruction.
+  - Unverified leads: Lee (SSRN), JP Morgan 2024 note, Minenna (Central Banking), FMIR 2025, Nishigaki (2025).
+  - BIS WP 626 country list (BOJ included or not) not confirmed. Kano and Wada data and sample not read.
+  - Research question still not recorded in the repo (CLAUDE.md goal is still forecasting). Step 3 brief.

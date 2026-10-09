@@ -72,6 +72,7 @@ How completeness was checked: I read the statement titles on every year page fro
 | PROTOCOL s.14.4 (design) | Clark-West HAC: Newey-West with lag h−1 | CW (2006) recommend the West (1997)/Hodrick (1992) estimator for overlapping forecasts. |
 | PROTOCOL s.14.2 (design) | T3 denominator and basis | BNP use non-commercial OI, and their result is about crash risk, not mean returns. |
 | PROTOCOL s.14.3 (design, found while deriving D0) | First origin "D0 + 120 months" | For h > 1 the window τ from t − h − 119 starts before D0. Consistent alternative: first origin = D0 + 119 + h. |
+| PROTOCOL s.3 (design) | Regime-window month labels vs BOJ decision dates | The YCC window ends Nov 2022, but the band was widened on 20 Dec 2022. Post-exit starts Apr 2024, but exit was decided 19 Mar 2024 and took effect 21 Mar 2024. The main sample starts 4 Jan 2016, but the negative rate took effect 16 Feb 2016 (YCC began 21 Sep 2016). |
 | PROTOCOL s.3 / freeze end date | Undated intervention, 30 Jul-26 Aug 2026 (¥15.4tn) | Dates due 2-9 Nov 2026. Options: wait for them, end the sample before 30 Jul 2026, or drop the whole 30 Jul-26 Aug window in robustness 2. |
 | PROTOCOL s.2 table (rows not added) | DGS1/DGS3/DGS5 (s.10 forwards) and CFTC (T3) have no row in the data table | Values in Table 1, rows 3 and 6. |
 

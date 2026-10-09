@@ -114,3 +114,4 @@
   - Regime-window month labels vs BOJ decision dates (Dec 2022, Mar 2024); main sample starts before the negative rate took effect.
   - CFTC historical release dates must be rebuilt in code from documented lags; the start of the Friday-release convention is undocumented.
   - Bai-Perron (trimming, max breaks) and Elliott-Müller (critical values, serial correlation) full texts not read; checklist line left unticked.
+- Follow-up commit (task 005 fix): added the regime-window row to the verification file's Table 3; reworded the PROTOCOL 14.2 T3 field list so the open-interest denominator stays open for Steven.

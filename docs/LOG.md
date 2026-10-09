@@ -115,3 +115,15 @@
   - CFTC historical release dates must be rebuilt in code from documented lags; the start of the Friday-release convention is undocumented.
   - Bai-Perron (trimming, max breaks) and Elliott-Müller (critical values, serial correlation) full texts not read; checklist line left unticked.
 - Follow-up commit (task 005 fix): added the regime-window row to the verification file's Table 3; reworded the PROTOCOL 14.2 T3 field list so the open-interest denominator stays open for Steven.
+
+## 2026-10-10 — Task 005 addendum: process record, council on open issues, task 006 handoff
+
+- What changed: at Steven's request, documented the task 005 process, ran an LLM council (5 advisors, 5 anonymous peer reviewers, chairman) on the 8 open issues, and wrote the handoff and plan for task 006. Smoke-tested the delegate CLIs (`grok -p`, `opencode run` with DeepSeek v4 flash). No PROTOCOL.md or DECISIONS.md change, no code, no data.
+- Files touched: docs/verification/005_process.md (new), docs/verification/005_council_verdict.md (new), docs/handoff/006_handoff.md (new), docs/LOG.md. Outside the repo: Notion project page (new handoff section).
+- Results:
+  - Council: freeze in the next session; none of the 8 issues blocks it. Decision sheet with 15 rows: the 8 task 005 issues plus 7 found in peer review (noise floor for Δj2, S2 as the M1 headline, Chow test at 1 Jul 2025 because 15% trimming cannot date a break after about Dec 2024, calendar and 2-day grid, one primary estimate per hypothesis, verifiable freeze, CFTC shutdown handling).
+  - Claude differs from the council on row 3: keep BNP as the pre-2016 basis for T3 and keep the IMF in the s.14.6 disclosure.
+  - Verified on cftc.gov: COT reports were suspended during the Dec 2018-Jan 2019 shutdown (release 7864-19) and the Oct-Nov 2025 shutdown (release 9138-25). The 2013 suspension is a Grok lead only (not verified).
+  - Verified (task 005 source): MOF intervention total for 29 Jun-29 Jul 2026 = ¥0, so a 29 Jul 2026 sample end is clean.
+- Deviations from brief: work after task 005 was closed, in the same session; Steven asked for it. 11 subagents were used for the council (Steven invoked /llm-council). Grok, run headless, executes shell commands without asking; the repo was checked clean after each run.
+- Open issues: Steven fills the decision sheet (rows 1-15) before task 006; task 006 brief in docs/handoff/006_handoff.md.

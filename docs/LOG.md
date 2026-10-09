@@ -84,3 +84,33 @@
 - Open issues:
   - Task 005: verify the section 11 checklist (BOJ dates, BOJ 17:00 series, DGS10, FRED 1Y/3Y/5Y, CFTC start date and release lag, intervention dates, test references).
   - D0 for Target 0 depends on the CFTC start date.
+
+## 2026-10-09 — Task 005: Freeze checklist verification (PROTOCOL.md section 11)
+
+- What changed: verified the section 11 checklist from primary sources (web reads only). Wrote the verification file. Filled verified values into PROTOCOL.md sections 2, 3, 9, 11 and 14 (STATUS still DRAFT v2; no design choice changed). No code, no data files, no estimation.
+- Files touched: docs/briefs/005_freeze_checklist.md (new, verbatim), docs/verification/005_freeze_checklist.md (new), docs/PROTOCOL.md, docs/LOG.md. Outside the repo: Notion project page.
+- Results:
+  - BOJ: negative rate decided 29 Jan 2016 (effective 16 Feb 2016); YCC 21 Sep 2016; YCC changes 31 Jul 2018, 19 Mar 2021 (±0.25%), 20 Dec 2022 (±0.5%), 28 Jul 2023 (references, 1.0% offers), 31 Oct 2023 (1% reference); exit 19 Mar 2024 (effective 21 Mar); call rate 0.25% (31 Jul 2024, eff. 1 Aug), 0.5% (24 Jan 2025, eff. 27 Jan), 0.75% (19 Dec 2025, eff. 22 Dec), 1.0% (16 Jun 2026, eff. 17 Jun), 1.25% (18 Sep 2026, eff. 24 Sep).
+  - BOJ 17:00 USD/JPY: FM08 / FXERD04, daily 1998-01-05 to 2026-10-07; BOJ API (launched 18 Feb 2026) returns CSV/JSON with no key; one-month test call (2026-09) returned 30 rows.
+  - FRED: DGS1, DGS3, DGS5, DGS10 from 1962-01-02; DGS2 from 1976-06-01; all to 2026-10-07. DEXJPUS 1971-01-04 to 2026-10-02. CMT = FRBNY bid-side quotes at or near 3:30 PM ET, bond-equivalent (semiannual) par yields.
+  - MOF interventions: CSV daily rows from 1991-05-13 (latest 2026-05-06); monthly totals at month-end, daily detail quarterly (Q2 2026 out 7 Aug 2026; Q3 2026 due 2-9 Nov 2026).
+  - August 2024 window: 2-9 Aug 2024 (BIS Bulletin 90, Graph 1 shading).
+  - CFTC: legacy futures-only, JPY code 097741, first as-of 1986-01-15, 1,937 reports to 2026-09-29. Derived D0 = Feb 1986.
+  - References: citations confirmed via Crossref for BP 1998/2003, EM 2006, NW 1987/1994, CW 2006/2007, PT 1992, Fama 1984, EE 1995, BNP 2008. CW (2006) is valid with a rolling window (their own application uses R = 120); PT needs serially independent outcomes.
+  - IMF CR 26/75 para 16: decomposition since Nov 2024 into rate differential (2Y and 10Y spreads combined), VIX, oil, residual; regression form not stated. Masujima & Sato Table 7: daily, Dec 2007-Dec 2022, N = 3,633; YCC_D = 1 from Sep 2016, interacted with the slope spread (1.078**) and CDS only.
+- Deviations from brief:
+  - PDFs were read with WebFetch, which keeps copies in the session tool-results folder (Steven approved this at the start). Text was extracted with pdftotext; two scanned papers (NW 1994, EE 1993 WP) were OCR'd with tesseract in the scratchpad. Nothing was saved to the repo or data/.
+  - Read through tools without saving to the repo: the MOF intervention CSV, a one-month BOJ API sample (30 values), BOJ and CFTC metadata, and CFTC API aggregates (min/max date, count).
+  - Bot challenges at JSTOR, OUP and ScienceDirect were not bypassed. Working-paper versions were read for CW 2006, NW 1994, EE 1995, BNP 2008 and PT 2006; Fama 1984 from a scan of the journal article on a course page.
+  - Sections 4, 5 and 6 also contain "fixed after verification" text; they are outside the brief's edit scope and were left unchanged (paste-ready facts in the verification file, Table 3). New data-table rows (DGS1/3/5, CFTC) were not added.
+  - The 2017, 2019 and 2020 BOJ statement lists were checked by title only; the 2020 "Enhancement of Monetary Easing" statements were not read in full.
+- Open issues (for Steven, before freeze):
+  - Clark-West HAC for overlapping forecasts: CW recommend the West (1997)/Hodrick (1992) estimator; the protocol uses Newey-West with lag h − 1.
+  - T3: BNP divide by non-commercial open interest (protocol: open interest); BNP link positions to crash risk, not mean returns.
+  - IMF's rate driver combines 2Y and 10Y spreads; S3 uses 10Y only. docs/lit/002 states IMF uses only 10Y (not edited).
+  - Newey-West lag rule (section 5): NW 1994 automatic (n = [4(T/100)^(2/9)], m = [γ̂T^(1/3)]) or the fixed software rule.
+  - Section 14.3: first origin D0 + 120 months is inconsistent for h > 1 (window starts before D0); D0 + 119 + h would be consistent.
+  - ¥15,399.3bn intervention between 30 Jul and 26 Aug 2026 with daily dates unknown until 2-9 Nov 2026; affects the freeze end date for robustness 2.
+  - Regime-window month labels vs BOJ decision dates (Dec 2022, Mar 2024); main sample starts before the negative rate took effect.
+  - CFTC historical release dates must be rebuilt in code from documented lags; the start of the Friday-release convention is undocumented.
+  - Bai-Perron (trimming, max breaks) and Elliott-Müller (critical values, serial correlation) full texts not read; checklist line left unticked.

@@ -70,3 +70,17 @@
   - Steven to sign off on and freeze PROTOCOL.md after the pre-freeze checklist (section 11).
   - Target 0 protocol not written. Steven to decide when it starts.
   - The Notion page still shows the old research question marked "待定". Update only on Steven's instruction.
+
+## 2026-10-09 — Task 004: Protocol amendments (C') and Target 0 pre-registration
+
+- What changed: rewrote PROTOCOL.md section 10 (0-2 year link) and added section 14 (Target 0 pre-registration). Updated sections 1, 11 and 12, and the status line (DRAFT v2). Recorded C' in DECISIONS.md. Wrote the plan to the Notion project page first, as Steven asked. No code, no data, no estimation.
+- Files touched: docs/briefs/004_protocol_amendments.md (new), docs/PROTOCOL.md, docs/DECISIONS.md, docs/LOG.md. Outside the repo: Notion project page.
+- Results:
+  - Section 10: baseline = today's spot (random walk). Scenarios are yield surprises relative to the curve-implied forward 2Y at 1, 12 and 24 months. S2m monthly betas, with a 95% band; "no usable view" if the band includes zero. 6 months is dropped from the scenario table (its forward needs sub-1-year yields).
+  - Section 14: three one-predictor models (T1 carry = US−JP 2Y level; T2 = one-month change in that differential; T3 = CFTC net non-commercial JPY positions / open interest, entering on its release date) against RW without drift. Rolling 120-month window (recursive as the only robustness variant); h = 1, 3, 6, 12. Clark-West with HAC lag h−1; Pesaran-Timmermann on non-overlapping origins; Bonferroni threshold 5%/12.
+  - Power: about 30 non-overlapping 12-month OOS periods, so a true R² of 5% is detected about a third of the time at 5% and under 10% at the Bonferroni threshold (rough). The earlier "about four in ten" (41 observations, before taking out the estimation window) was too optimistic and is corrected on Notion.
+  - Also verified this session: the MOF JP 2Y column is numeric 1988/8-1993/5 and 1997/12-2002/7 (the two chunks unread in task 001). JP 2Y is now numeric across every chunk read from 1979/8/22; a code check is still needed.
+- Deviations from brief: fifth task in this session; breaks the one-task-per-session rule (Steven said to continue). The 6-month horizon was dropped from the scenario table (Target 0 keeps 6 months).
+- Open issues:
+  - Task 005: verify the section 11 checklist (BOJ dates, BOJ 17:00 series, DGS10, FRED 1Y/3Y/5Y, CFTC start date and release lag, intervention dates, test references).
+  - D0 for Target 0 depends on the CFTC start date.

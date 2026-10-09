@@ -6,3 +6,4 @@
 - 2026-10-09: Key use of the project: insight into USD/JPY changes over the next 0-2 years.
 - 2026-10-09: Target 1 is descriptive (co-movement), not causal.
 - 2026-10-09: Notion rule clarified by Steven: Claude may create a new Notion page when Steven asks; existing pages are never edited without his direct instruction.
+- 2026-10-09: Option C' agreed. The 0-2 year insight comes from Target 1: scenarios are stated as yield moves beyond what the market already prices, and betas are matched to the horizon. Target 0 is pre-registered now, frozen together with Target 1, and run after Target 1: horizons 1, 3, 6 and 12 months only (no 24 months), long sample from about 1985, compared against a random walk (Clark-West and direction accuracy), with at most three predictor sets chosen from theory and literature.

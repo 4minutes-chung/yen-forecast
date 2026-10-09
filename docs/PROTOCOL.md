@@ -1,12 +1,12 @@
 # Research Protocol
 
-STATUS: DRAFT v1 (2026-10-09), not frozen. Do not estimate anything against this file until it says FROZEN. Freezing needs Steven's sign-off. After freezing, every change is logged in docs/DECISIONS.md with a reason.
+STATUS: DRAFT v2 (2026-10-09, task 004), not frozen. Do not estimate anything against this file until it says FROZEN. Freezing needs Steven's sign-off. After freezing, every change is logged in docs/DECISIONS.md with a reason.
 
 ## 1. Scope
 
 - Target 1 question: how did USD/JPY's daily sensitivity to the JP 2Y yield change from YCC (2016) through the dismantling (2022-24) to after the exit (2024-26), and does the post-2025 decoupling from the 10Y differential also show at 2Y?
 - In-sample and descriptive. Results describe co-movement, not causation, and are not forecasts.
-- Target 0 (forecasts against a random walk) has no protocol yet. It will be drafted separately.
+- Target 0 (forecasts against a random walk) is pre-registered in section 14. It is frozen together with Target 1 and run only after the Target 1 note is done.
 
 ## 2. Data
 
@@ -90,11 +90,17 @@ H1 and H2 use different metrics and can both be true: the per-bp beta can fall w
 4. Sample from 2010.
 5. Rolling windows of 125 and 500 trading days.
 
-## 10. Link to the 0-2 year view
+## 10. Link to the 0-2 year view (conditional, not a forecast)
 
-- Decompose the cumulative change in USD/JPY in each regime window into a rate-explained part and an unexplained part (from S2). This shows which driver matters now.
-- Conditional scenario table: translate stated scenarios for JP 2Y and US 2Y over 6, 12 and 24 months into implied USD/JPY moves, using the latest-window betas with bands. Labelled conditional. It is not a forecast.
-- Any unconditional directional claim belongs to Target 0 and must be tested against the random walk.
+- Driver decomposition: split the cumulative change in USD/JPY in each regime window into a rate-explained part and an unexplained part (from S2). This shows which driver matters now.
+- Conditional scenario table:
+  - Baseline: today's spot rate (random walk), consistent with Target 0.
+  - A scenario is a yield surprise: the JP 2Y (or US 2Y) at the horizon ends X bp above or below the curve-implied forward 2Y for that horizon. Market-priced policy paths are already in yields and forward FX, so only the surprise part should move the yen.
+  - Horizons and forwards: 1 month (baseline = current 2Y; the forward drift over one month is ignored); 12 months (2Y forward one year ahead, from the 1Y and 3Y yields); 24 months (2Y forward two years ahead, from the 2Y and 4Y yields; for the US, the 4Y is interpolated between 3Y and 5Y). Yields are semiannual-compounded. 6 months is dropped because the forward needs sub-1-year yields.
+  - Betas: S2m (monthly) betas from the latest regime window for all three horizons. Daily S2 betas are shown next to them for comparison only.
+  - Output: implied move in USD/JPY (%) with a 95% band. If the band includes zero, report "no usable rate-based view at this horizon" instead of a number.
+- Stated limitations (not tested): forwards include a term premium, so "surprise vs forward" is approximate; scaling a monthly beta to a 12- or 24-month cumulative surprise assumes no mean reversion within the horizon.
+- Any unconditional directional claim belongs to Target 0 (section 14) and must be tested against the random walk.
 
 ## 11. Before freezing
 
@@ -105,13 +111,62 @@ H1 and H2 use different metrics and can both be true: the per-bp beta can fall w
 - [ ] Exact dates for the August 2024 window
 - [ ] Test references: Bai-Perron, Elliott-Müller, Newey-West lag rule
 - [ ] Read IMF CR 26/75 para 16 (method) and Masujima & Sato Table 7
-- [ ] Steven's sign-off
+- [ ] FRED short-maturity US yields for forwards (1Y, 3Y, 5Y series)
+- [ ] CFTC Commitments of Traders for JPY futures: start date, which report series (legacy futures-only, non-commercial), and release lag
+- [ ] Clark-West test with a rolling window; HAC lag rule for overlapping h-month forecasts
+- [ ] Direction test with overlapping forecasts (Pesaran-Timmermann assumes independent observations)
+- [ ] Pre-2016 references for the Target 0 predictors: Fama (1984), Eichenbaum & Evans (1995), Brunnermeier, Nagel & Pedersen (2008)
+- [ ] Steven's sign-off (Target 1 and Target 0 together)
 
 ## 12. Order of work
 
-003 (this draft) → Steven signs off and freezes → 004 data ingest (level plots allowed, no regressions) → 005 rolling betas and break tests under this protocol.
+003 draft → 004 amendments and Target 0 pre-registration → 005 verify the section 11 checklist → Steven signs off and freezes Target 1 and Target 0 together → 006 data ingest (level plots allowed, no regressions) → 007 Target 1 estimation (rolling betas, break tests, M1-M3) → Target 1 note (by end Feb 2027) → Target 0 run exactly as pre-registered.
 
 ## 13. Done and stop rules
 
 - Done: a 5-page note with one table and one figure by end of Feb 2027.
 - Stop: two weekends of work with no surprise (section 8) means stop.
+
+## 14. Target 0 pre-registration (DRAFT; frozen together with Target 1; run after the Target 1 note)
+
+Purpose: test whether three simple, theory-based predictors forecast USD/JPY better than a random walk at 1-12 months. Every choice below is fixed now, before any estimation on our data.
+
+### 14.1 Data and timing
+
+- Monthly. Predictors use values from the last business day of month t.
+- Target: Δ_h s = 100 × [ln S(t+h) − ln S(t)], where S(t) is DEXJPUS (NY noon) on the first NY business day of month t+1 and S(t+h) is the same convention h months later. Starting the target after month-end avoids any intraday overlap with the predictors.
+- Horizons: h = 1, 3, 6, 12 months. No 24-month horizon (about 20 non-overlapping observations even from 1985).
+- Data start D0 = the later of Jan 1985 and the first month in which all three predictors exist. D0 applies to every model and to the random walk, so all are compared on identical dates.
+
+### 14.2 Models (exactly three, plus the benchmark)
+
+| ID | Predictor x(t) | Source and lag | Basis (pre-2016; verify before freeze) |
+|---|---|---|---|
+| RW | None: forecast of Δ_h s is 0 (random walk without drift) | — | Meese-Rogoff benchmark |
+| T1 Carry | US 2Y − JP 2Y at month-end t (pp) | FRED DGS2, MOF jgbcme; market prices known at the close | Fama (1984) forward-premium regression |
+| T2 Rate momentum | One-month change in (US 2Y − JP 2Y) up to month-end t (pp) | Same | Eichenbaum & Evans (1995) delayed overshooting |
+| T3 Positioning | CFTC net non-commercial JPY futures position (long − short) / open interest | CFTC COT; latest report whose public release date is on or before the last business day of month t | Brunnermeier, Nagel & Pedersen (2008) |
+
+- Each model: Δ_h s = α + β·x(t) + e, estimated by OLS. One predictor per model. No combinations, no model averaging, no added predictors.
+
+### 14.3 Estimation scheme
+
+- Main: rolling window of 120 months. At origin t, use only pairs whose outcome is known at t (τ from t − h − 119 to t − h).
+- First origin: D0 + 120 months. Last origin: the last month-end whose h-month outcome is available at freeze.
+- Robustness (one variant only): recursive window from D0.
+
+### 14.4 Evaluation
+
+- MSFE ratio (model / RW) for each model and horizon.
+- Clark-West test of each model against RW (nested, one-sided), Newey-West HAC standard errors with lag h − 1.
+- Direction: share of origins where the forecast sign matches the realised sign; tested on non-overlapping origins (every h-th origin from the first) with Pesaran-Timmermann.
+- Headline threshold: Bonferroni over 12 tests (3 models × 4 horizons), one-sided 5% / 12. All 12 raw p-values are reported.
+- Sub-samples, reported but not headline: origins before Jan 2016 and from Jan 2016.
+
+### 14.5 Expected power (rough)
+
+With about 30 non-overlapping 12-month out-of-sample periods, a predictor with a true R² of 5% would be detected about a third of the time at 5%, and under 10% of the time at the Bonferroni threshold (normal approximation, in-sample t-statistic; a real out-of-sample test has less power). A null result is expected and is pre-declared as informative: "these three predictors do not beat a random walk at 1-12 months."
+
+### 14.6 Disclosure
+
+The predictors are fixed before any estimation in this repo, but after reading the 2024-26 literature in docs/lit/ (task 002). T3 overlaps with IMF CR 26/75, which links recent yen moves to futures positioning.

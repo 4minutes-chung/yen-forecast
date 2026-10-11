@@ -155,3 +155,19 @@
   - s.2 data table still lacks rows for DGS1/3/5 and CFTC (no row covers them).
   - docs/lit/002_deep_review.md still lists "what method the staff analysis used" as an open question and its proposed question wording; left unchanged.
   - COT 2013 suspension unverified (Grok lead only).
+
+## 2026-10-12 — Task 006 follow-up: second Grok review (still DRAFT v3)
+
+- What changed: Steven asked to record the output on Notion and continue. Notion project page: new section "第 6 步結果：Task 006 套用決定" (15 calls, deviations, open issues) and status lines. Re-ran Grok on the post-fix diff (`git diff b9b405a`; repo clean after the run). Fixed what it found in PROTOCOL.md; no freeze, no tag, no hash.
+- Files touched: docs/PROTOCOL.md, docs/DECISIONS.md, docs/LOG.md. Outside the repo: Notion project page.
+- Grok second review, each point:
+  - Five earlier fixes: confirmed.
+  - H1 primary M2 is two statistics (R², variance contribution): primary is now the variance contribution; R² secondary.
+  - Step 0 "at least one of M1-M3": now one test, M1 b_10 in S3, post-mid-2025 vs post-exit window before it; M2, M3 reported.
+  - s.8 S2 vs S2m item named no coefficient; Bai-Perron item had an undefined break date: both now named (S2 b_j2 sign in the post-exit window; any point-estimate break date before 20 Dec 2022).
+  - s.7 and s.8 both counted toward the stop rule: now only the closed s.8 list counts; H1-H4 primaries are hypothesis tests; s.13 reworded.
+  - s.12 runs the Chow test in task 008 but s.7 limited Step 0 to S3: s.7 now says task 008 also runs H4's Chow test.
+  - Look-ahead: training pair τ = t − h ends at S(t), which is after month-end t. Not a flaw: the origin time is S(t) (NY noon, first business day of t+1), so all inputs precede it. Written into s.14.3.
+  - 1 Jul 2025 Chow date from the IMF narrative: already disclosed in H4.
+- Deviations: none new. The edits after this second review were not re-reviewed by Grok.
+- Open issues: unchanged from the previous entry (Steven's "freeze"; s.2 data-table rows; COT 2013; opencode hang).

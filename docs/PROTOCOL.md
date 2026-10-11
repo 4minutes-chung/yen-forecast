@@ -66,13 +66,13 @@ Bai-Perron and Elliott-Müller: citation and abstract verified, full text not re
 
 ## 7. Hypotheses (written before any estimation)
 
-Step 0: S3 (IMF-style 10Y check) must show a weakening after mid-2025 on at least one of M1-M3. If it does not, check data and timing before interpreting any 2Y result. S3 does not replicate the IMF chart (section 5).
+Step 0: S3 (IMF-style 10Y check) must show a weakening after mid-2025. The single test is M1: b_10 in S3, post-mid-2025 window against the post-exit window before it, 5%; M2 and M3 are reported. If it does not, check data and timing before interpreting any 2Y result. S3 does not replicate the IMF chart (section 5). Task 008 also runs H4's Chow test (below), because it needs no rolling estimation.
 
-Primary estimates (row 14): each hypothesis has one primary estimate and one threshold, set in the table. Everything else is secondary and labelled so. Only primary estimates, and the closed list of surprises in section 8, count toward the stop rule (sections 8 and 13).
+Primary estimates (row 14): each hypothesis has one primary estimate and one threshold, set in the table. Everything else is secondary and labelled so. The H1-H4 primaries are the hypothesis tests. Only the closed list of surprises in section 8 counts toward the stop rule (section 13).
 
 | H | Statement | Metric | Prediction |
 |---|---|---|---|
-| H1 | JP 2Y regains information as YCC is dismantled | M2 (and the absolute value of b_j2) | Near zero in the YCC window, higher after the transition; a break in b_j2 dated in or after the transition window. Primary: S2 M2 in the post-exit window against the YCC window, 5%. Counts only if the break survives the abs(Δj2) < 1bp run (row 10) |
+| H1 | JP 2Y regains information as YCC is dismantled | M2 (and the absolute value of b_j2) | Near zero in the YCC window, higher after the transition; a break in b_j2 dated in or after the transition window. Primary: the S2 variance contribution b_j2²·var(Δj2)/var(Δs) (M2) in the post-exit window against the YCC window, 5%; R² is secondary. Counts only if the break survives the abs(Δj2) < 1bp run (row 10) |
 | H2 | Lower-bound amplification (Ferrari, Kearns & Schrimpf) | M1 | Absolute value of b_j2 per bp largest in the YCC window, smaller after exit. Primary: S2 b_j2, YCC window against post-exit, 5% (not tested if the YCC window is "not identified") |
 | H3 | Which S2 leg lost explanatory power after mid-2025 (the IMF rate driver combines the 2Y and 10Y spreads, so the loss need not sit in the long end) | M1 for b_j2 and b_jsl, post-mid-2025 against the post-exit window before it | If the loss sits in the long end: b_j2 stays negative and significant; b_jsl weakens or turns positive. Primary: S2 b_jsl, change between the two windows, 5%. The change in b_j2 is secondary |
 | H4 | Betas are stable; the decoupling sits in the unexplained part | M1-M3 | No significant Chow break at 1 Jul 2025 in (b_j2, b_jsl) of S2, but R² falls or the cumulative residual drifts (yen weaker than rates imply). Consistent with IMF's positioning account. Primary: the joint Chow test of b_j2 and b_jsl at 1 Jul 2025 on S2, 5%. qLL is reported as secondary. The date comes from the IMF mid-2025 narrative, fixed here before any estimation |
@@ -81,12 +81,12 @@ H1 and H2 use different metrics and can both be true: the per-bp beta can fall w
 
 ## 8. What counts as a surprise
 
-- b_j2 positive and significant after mid-2025 (a higher JP 2Y with a weaker yen).
-- A break in b_j2 dated before 20 Dec 2022, outside the policy-change windows (Bai-Perron on S2).
-- S3 (IMF-style 10Y check) shows no weakening after mid-2025.
-- Daily and monthly betas with opposite signs.
+- S2 b_j2 positive and significant after mid-2025 (a higher JP 2Y with a weaker yen).
+- Any Bai-Perron break date for S2 b_j2 (point estimate; number of breaks chosen by the package default, up to 3) before 20 Dec 2022, outside the policy-change windows.
+- Step 0: the S3 b_10 test (section 7) shows no weakening after mid-2025.
+- The sign of S2 b_j2 and S2m b_j2 differ in the post-exit window.
 
-The four outcomes above are the closed list of surprises that count toward the stop rule (row 14). Each is one named estimate at 5%: the S2 b_j2 in the post-mid-2025 window, the Bai-Perron break date on S2 b_j2, the Step 0 S3 result, and the S2 against S2m sign comparison. Any other result that looks like a surprise is reported as exploratory.
+The four outcomes above are the closed list of surprises that count toward the stop rule (row 14). Each is one named estimate at 5%: S2 b_j2 post-mid-2025, the Bai-Perron break date for S2 b_j2, the Step 0 S3 b_10 test, and the sign of S2 b_j2 against S2m b_j2 in the post-exit window. Any other result that looks like a surprise is reported as exploratory.
 
 ## 9. Robustness (fixed list; anything else is labelled exploratory)
 
@@ -136,7 +136,7 @@ Tick rule (task 005): ticked = read from the primary source in task 005, even wh
 ## 13. Done and stop rules
 
 - Done: a 5-page note with one table and one figure by end of Feb 2027.
-- Stop: two weekends of work with no primary surprise (sections 7 and 8) means stop.
+- Stop: two weekends of work with no surprise from the closed list in section 8 means stop.
 
 ## 14. Target 0 pre-registration (DRAFT; frozen together with Target 1; run after the Target 1 note)
 
@@ -162,7 +162,7 @@ Purpose: test whether three simple, theory-based predictors forecast USD/JPY bet
 
 ### 14.3 Estimation scheme
 
-- Main: rolling window of 120 months. At origin t, use only pairs whose outcome is known at t (τ from t − h − 119 to t − h).
+- Main: rolling window of 120 months. The origin time of month t is S(t), NY noon on the first business day of month t+1, so every predictor (month-end t close or earlier) precedes it, and the training outcome of the pair τ = t − h, which ends at S(t), is observed at that time. At origin t, use only pairs whose outcome is known at t (τ from t − h − 119 to t − h).
 - First origin: D0 + 119 + h months (row 4: the first window then starts at D0). Last origin: the last month-end whose h-month outcome is available at freeze.
 - Exploratory variant (one only, labelled exploratory, not headline; row 1): recursive window from D0.
 

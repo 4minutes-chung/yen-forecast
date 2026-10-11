@@ -127,3 +127,31 @@
   - Verified (task 005 source): MOF intervention total for 29 Jun-29 Jul 2026 = ¥0, so a 29 Jul 2026 sample end is clean.
 - Deviations from brief: work after task 005 was closed, in the same session; Steven asked for it. 11 subagents were used for the council (Steven invoked /llm-council). Grok, run headless, executes shell commands without asking; the repo was checked clean after each run.
 - Open issues: Steven fills the decision sheet (rows 1-15) before task 006; task 006 brief in docs/handoff/006_handoff.md.
+
+## 2026-10-11 — Task 006: Decisions applied, protocol v3 (not frozen)
+
+- What changed: Steven wrote "GO ... YOU DECIDE AND YOU TO HELP" in chat, so Claude filled the 15-row decision sheet (last column labelled as delegated). PROTOCOL.md is now DRAFT v3, ready for sign-off. DECISIONS.md has one entry per row plus a refinement entry. IMF CR 26/75 method text corrected in the two lit notes. No code, no data, no estimation. NOT frozen: "freeze" has not been written in chat; no tag, no hash.
+- Files touched: docs/briefs/006_decisions_and_freeze.md (new, verbatim), docs/verification/005_council_verdict.md (column filled), docs/PROTOCOL.md, docs/DECISIONS.md, docs/lit/002_prior_work.md, docs/lit/002_deep_review.md, docs/LOG.md.
+- Calls (all accept the council default except where stated):
+  - Row 2: T3 denominator = long + short (spreading excluded). Row 3: override, BNP is the basis worded as "crash-risk link, mean-return link untested; T3 tests it"; IMF stays in the s.14.6 disclosure.
+  - Row 5: main sample ends 29 Jul 2026. Row 6: window dates as in the sheet. Row 9: L = 35 / 14 / 10 days.
+  - Row 14 detail chosen by Claude (not in the sheet): H1 S2 M2 post-exit vs YCC; H2 S2 b_j2 YCC vs post-exit; H3 change in S2 b_jsl; H4 joint Chow at 1 Jul 2025. All 5%.
+- Grok review (git diff b9b405a, headless; repo checked after the run, no stray edits). Each point and what was done:
+  - Bai-Perron "package defaults" vs "up to 3 breaks, 15% trimming": kept; those two settings were pre-registered in task 004.
+  - H1 gated on "not identified" (defined for M1): removed the extra gate; H1 now only needs its break to survive the 1bp run, as row 10 says.
+  - H4 and H3 had compound primaries (qLL, b_j2 and b_jsl): H4 primary = joint Chow, qLL secondary; H3 primary = change in b_jsl.
+  - s.8 "before Dec 2022" vs new YCC end: changed to 20 Dec 2022. s.8 vs "only primary counts": s.8 is now a closed list of four surprises, each one named estimate at 5%.
+  - s.11 stale "Conflict" notes: marked as resolved with the row number.
+  - Noise floor on daily vs 2-day S2: share computed on the daily series, 2-day share reported alongside.
+  - Chow date taken from the IMF narrative: disclosed in H4. L-day CFTC rule is conservative: intended.
+  - Not applied: rows listed as "changes no row covers" (STATUS, s.12 order from sheet section 2, DEXJPUS timing sentence from Table 3, H2 gate): kept, they follow the sheet's section 2 or Table 3.
+  - The edits after the Grok review were not re-reviewed by Grok.
+- Deviations from brief:
+  - Precondition said never to fill rows with the council default on my own; Steven delegated the decisions in chat, so the column is labelled "Delegated by Steven in chat 2026-10-11". Steven should read rows 2, 3 and 14 before saying "freeze".
+  - Step 3: DeepSeek flash (opencode) hung twice (over 5 min with no edit, and again on a trivial prompt). I killed it and made the lit-note edits myself; two extra lines in 002_prior_work.md (novelty paragraph) were also corrected for the IMF method. Steven should check the diff.
+  - Steps 5 skipped by design (no freeze).
+- Open issues:
+  - Steven's "freeze" word; then tag protocol-v3-frozen, SHA-256, end-date confirmation. OSF registration optional (Steven's account).
+  - s.2 data table still lacks rows for DGS1/3/5 and CFTC (no row covers them).
+  - docs/lit/002_deep_review.md still lists "what method the staff analysis used" as an open question and its proposed question wording; left unchanged.
+  - COT 2013 suspension unverified (Grok lead only).
